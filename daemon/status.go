@@ -138,6 +138,9 @@ func (d *Daemon) getKubeProxyReplacementStatus() *models.KubeProxyReplacement {
 		features.NodePort.PortMin = int64(option.Config.NodePortMin)
 		features.NodePort.PortMax = int64(option.Config.NodePortMax)
 	}
+	if option.Config.EnableHostPort {
+		features.HostPort.Enabled = true
+	}
 	if option.Config.EnableExternalIPs {
 		features.ExternalIPs.Enabled = true
 	}
@@ -157,7 +160,6 @@ func (d *Daemon) getKubeProxyReplacementStatus() *models.KubeProxyReplacement {
 		Mode:     mode,
 		Features: features,
 	}
-
 }
 
 type getHealthz struct {
